@@ -1,7 +1,10 @@
 class SpriteModel {
-  constructor(width, height, img) {
+  constructor(width, height, columns, rows, size) {
+    this.img = undefined;
     this.width = width;
     this.height = height;
-    this.img = undefined;
+    this.columns = columns;
+    this.rows = rows;
+    this.size = size;
   }
 }

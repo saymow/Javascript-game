@@ -1,9 +1,10 @@
 class Animate {
-  constructor(imagem, width, height, columns, rows, size, positionX, positionY) {
-    
-    console.log(imagem, width, height, columns, rows, size, positionX, positionY);
+  constructor(spriteData, positionX, positionY, varY) {
+    const { img, width, height, columns, rows, size } = spriteData;
 
-    this.imagem = imagem;
+    console.log(img, width, height, columns, rows, size, positionX, positionY);
+
+    this.imagem = img;
     this.charData = {
       size: size,
       currentFramePos: [0, 0], // x, y
@@ -16,14 +17,15 @@ class Animate {
         height: height * size,
       },
       initialPos: {
-        x: positionX === innerWidth ? positionX - (width * size) : positionX, 
-        y: positionY - height * size,
+        x: positionX === innerWidth ? positionX - width * size : positionX,
+        y: positionY - height * size - varY,
       },
       currentPos: {
-        x: positionX === innerWidth ? positionX - (width * size) : positionX,
-        y: positionY - height * size
-      }
+        x: positionX === innerWidth ? positionX - width * size : positionX,
+        y: positionY - height * size - varY,
+      },
     };
+    console.log(this.charData.initialPos.y);
     this.currentFrame = 0; // x, y
   }
 
@@ -50,7 +52,8 @@ class Animate {
 
   calcCurrentPosition() {
     const row =
-      Math.floor(this.currentFrame / this.charData.columns) < this.charData.columns
+      Math.floor(this.currentFrame / this.charData.columns) <
+      this.charData.columns
         ? Math.floor(this.currentFrame / this.charData.columns)
         : 0;
 

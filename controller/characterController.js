@@ -1,15 +1,6 @@
 class CharacterConstructor extends Animate {
-  constructor(
-    imagem,
-    width,
-    height,
-    rows,
-    columns,
-    size,
-    positionX,
-    positionY
-  ) {
-    super(imagem, width, height, rows, columns, size, positionX, positionY);
+  constructor(spriteData, positionX, positionY, varY) {
+    super(spriteData, positionX, positionY, varY);
 
     this.jumpForce = 0;
     this.Gravity = 5;
@@ -18,7 +9,7 @@ class CharacterConstructor extends Animate {
 
   jump() {
     if (this.jumpCount < 2) {
-      this.jumpForce = -30;
+      this.jumpForce = -50;
       this.jumpCount += 1;
 
       return true;
@@ -28,7 +19,7 @@ class CharacterConstructor extends Animate {
   }
 
   setGravityEffect() {
-    this.charData.currentPos.y += +this.jumpForce;
+    this.charData.currentPos.y += this.jumpForce;
     this.jumpForce += this.Gravity;
 
     if (this.charData.currentPos.y > this.charData.initialPos.y) {
@@ -41,6 +32,24 @@ class CharacterConstructor extends Animate {
     const precision = 0.7;
 
     noFill();
+
+    rect(
+      this.charData.currentPos.x +
+        ((1 - precision) / 2) * this.charData.displayDimension.width,
+      this.charData.currentPos.y +
+        ((1 - precision) / 2) * this.charData.displayDimension.height,
+      this.charData.displayDimension.width * precision,
+      this.charData.displayDimension.height * precision
+    );
+
+    rect(
+      enemy.charData.currentPos.x +
+        ((1 - precision) / 2) * enemy.charData.displayDimension.width,
+      enemy.charData.currentPos.y +
+        ((1 - precision) / 2) * enemy.charData.displayDimension.width,
+      enemy.charData.displayDimension.width * precision,
+      enemy.charData.displayDimension.height * precision
+    );
 
     const response = collideRectRect(
       this.charData.currentPos.x +

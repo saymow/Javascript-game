@@ -1,22 +1,15 @@
 class EnemyConstructor extends Animate {
-  constructor(
-    imagem,
-    width,
-    height,
-    rows,
-    columns,
-    size,
-    positionX,
-    positionY,
-    velocity
-  ) {
-    super(imagem, width, height, rows, columns, size, positionX, positionY);
+  constructor(spriteData, positionX, positionY, varY, velocity) {
+    super(spriteData, positionX, positionY, varY);
 
     this.velocity = velocity;
+
+    this.minWidhtBoundary = -spriteData.width;
   }
 
   move() {
-    if (this.charData.currentPos.x <= 0) this.charData.currentPos.x = this.charData.initialPos.x;
+    if (this.charData.currentPos.x <= this.minWidhtBoundary)
+      this.charData.currentPos.x = this.charData.initialPos.x;
     else this.charData.currentPos.x -= this.velocity;
   }
 }
