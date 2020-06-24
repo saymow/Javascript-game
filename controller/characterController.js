@@ -1,53 +1,62 @@
-class CharacterConstructor {
-  constructor(imagem, width, height, rows, columns, size) {
-    this.imagem = imagem;
-    this.charData = {
-      size: size,
-      currentFramePos: [0, 0], // x, y
-      frames: rows * columns,
-      rows: rows,
-      columns: columns,
-      dimension: [width, height],
-    };
-    this.currentFrame = 0; // x, y
+class CharacterConstructor extends Animate {
+  constructor(
+    imagem,
+    width,
+    height,
+    rows,
+    columns,
+    size,
+    positionX,
+    positionY
+  ) {
+    super(imagem, width, height, rows, columns, size, positionX, positionY);
+
+    this.jumpForce = 0;
+    this.Gravity = 5;
+    this.jumpCount = 0;
   }
 
-  show() {
-    image(
-      this.imagem,
-      0,
-      height - this.charData.dimension[1] / 2,
-      this.charData.dimension[0] * this.charData.size, // The sprite's size on screen.
-      this.charData.dimension[1] * this.charData.size,
-      this.charData.currentFramePos[0],
-      this.charData.currentFramePos[1],
-      this.charData.dimension[0], // Lines intended to cut sprite on image file.
-      this.charData.dimension[1]
+  jump() {
+    if (this.jumpCount < 2) {
+      this.jumpForce = -30;
+      this.jumpCount += 1;
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  setGravityEffect() {
+    this.charData.currentPos.y += +this.jumpForce;
+    this.jumpForce += this.Gravity;
+
+    if (this.charData.currentPos.y > this.charData.initialPos.y) {
+      this.jumpCount = 0;
+      this.charData.currentPos.y = this.charData.initialPos.y;
+    }
+  }
+
+  subscribeCollision(enemy) {
+    const precision = 0.7;
+
+    noFill();
+
+    const response = collideRectRect(
+      this.charData.currentPos.x +
+        ((1 - precision) / 2) * this.charData.displayDimension.width,
+      this.charData.currentPos.y +
+        ((1 - precision) / 2) * this.charData.displayDimension.height,
+      this.charData.displayDimension.width * precision,
+      this.charData.displayDimension.height * precision,
+      enemy.charData.currentPos.x +
+        ((1 - precision) / 2) * enemy.charData.displayDimension.width,
+      enemy.charData.currentPos.y +
+        ((1 - precision) / 2) * enemy.charData.displayDimension.width,
+      enemy.charData.displayDimension.width * precision,
+      enemy.charData.displayDimension.height * precision
     );
 
-    this.animate();
-  }
-
-  animate() {
-    const [x, y] = this.calcCurrentPosition();
-    this.charData.currentFramePos = [x, y];
-  }
-
-  calcCurrentPosition() {
-    const row =
-      Math.floor(this.currentFrame / this.charData.rows) < this.charData.rows
-        ? Math.floor(this.currentFrame / this.charData.rows)
-        : 0;
-
-    const column = this.currentFrame % this.charData.rows;
-
-    if (this.currentFrame === this.charData.frames) this.currentFrame = 0;
-
-    this.currentFrame++;
-
-    return [
-      row * this.charData.dimension[0],
-      column * this.charData.dimension[1],
-    ];
+    return response;
   }
 }

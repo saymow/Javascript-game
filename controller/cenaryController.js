@@ -1,4 +1,3 @@
-
 class CenaryConstructor {
   constructor(image, velocity) {
     this.image = image;
