@@ -8,7 +8,7 @@ function keyPressed() {
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
-  // gameSound.loop();
+  // gameSound.loop(); 
   frameRate(30);
   game = new Game();
   initialScreen = new InitialScreen();
