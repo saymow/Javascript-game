@@ -7,6 +7,12 @@ class InitialScreen {
     this._button();  
   }
 
+  keyPressed() {
+    if(["Enter", ""].includes(key)) {
+      initalButton._switchScene();
+    }
+  }
+
   _backgroundImage() {
     image(initalScreenImg, 0, 0, innerWidth, innerHeight);
   }

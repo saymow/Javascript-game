@@ -1,4 +1,5 @@
 let game,
+  JSONdata,
   initialScreen,
   sceneController,
   currentScene,
@@ -7,11 +8,13 @@ let game,
   initalScreenImg,
   cenaryImg,
   gameOverImg,
+  livesImg,
   gameSound,
   jumpSound,
   cenary,
   character,
-  score;
+  score,
+  lives;
 
 const witchSprite = new SpriteModel(220, 270, 4, 4, 0.5);
 const enemySprite = new SpriteModel(104, 104, 4, 7, 0.5);

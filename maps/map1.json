@@ -1,0 +1,32 @@
+{
+  "chunks": [
+    {
+      "Enemy": 0,
+      "velocity": 10
+    },
+    {
+      "Enemy": 1,
+      "velocity": 15
+    },
+    {
+      "Enemy": 2,
+      "velocity": 20
+    },
+    {
+      "Enemy": 2,
+      "velocity": 15
+    },
+    {
+      "Enemy": 0,
+      "velocity": 25
+    },
+    {
+      "Enemy": 1,
+      "velocity": 30
+    },
+    {
+      "Enemy": 0,
+      "velocity": 45
+    }
+  ]
+}

@@ -6,7 +6,10 @@ const gamePreload = () => {
   cenaryImg = loadImage("./assets/imagens/cenario/floresta.png");
   gameSound = loadSound("./assets/sons/trilha_jogo.mp3");
   gameOverImg = loadImage("./assets/imagens/assets/game-over.png");
+  livesImg = loadImage("./assets/imagens/assets/coracao.png");
   initalScreenImg = loadImage("./assets/imagens/assets/telaInicial.png")
   fontInital = loadFont("./assets/imagens/assets/fonteTelaInicial.otf");
   jumpSound = loadSound("./assets/sons/somPulo.mp3");
+  JSONdata = loadJSON("./maps/map1.json");
+  console.log(JSONdata);
 };

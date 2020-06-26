@@ -5,6 +5,7 @@ class CharacterConstructor extends Animate {
     this.jumpForce = 0;
     this.Gravity = 5;
     this.jumpCount = 0;
+    this.invincible = false;
   }
 
   jump() {
@@ -66,6 +67,17 @@ class CharacterConstructor extends Animate {
       enemy.charData.displayDimension.height * precision
     );
 
-    return response;
+    if (this.invincible) return;
+    if (response) {
+      this.colisionDebouncer();
+      return response;
+    }
+  }
+
+  colisionDebouncer() {
+    this.invincible = true;
+    setTimeout(() => {
+      this.invincible = false;
+    }, 500);
   }
 }
